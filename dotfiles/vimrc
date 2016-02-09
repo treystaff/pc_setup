@@ -1,0 +1,8 @@
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" Turns on numbering by default
+set number
+
+" Highlights matching brackets/braces/parens
+set showmatch
