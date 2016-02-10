@@ -1,3 +1,41 @@
+" Begin Vundle Config
+" Following required for Vundle Plugin Manager
+set nocompatible
+filetype off
+" Set the runtime path to include Vundle & init
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" Let vundle manage vundle
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Yggdroot/indentLine'
+" -----------------------------
+" PLACE PLUGINS ABOVE THIS LINE
+" Finish Vundle initialization
+call vundle#end()
+filetype plugin indent on
+" End Vundle Config
+
+" configure the powerline status bar
+"python from powerline.vim import setup as powerline_setup
+"python powerline_setup()
+"python del powerline_setup
+set laststatus=2
+"set showtabline=2
+set noshowmode
+augroup FastEscape
+	autocmd!
+	au InsertEnter * set timeoutlen=0
+	au InsertLeave * set timeoutlen=1000
+augroup END
+
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
@@ -6,3 +44,68 @@ set number
 
 " Highlights matching brackets/braces/parens
 set showmatch
+
+" Set color
+set t_Co=256
+
+" Remap Ctl-C in visual mode to Esc. This lets us leave visual quicker...
+vnoremap <ESC> <C-c>
+" Some config for vim-airline
+let g:airline#extension#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" Change split nav
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" File settings
+" For Python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+    \ let python_highlight_all=1 |
+
+" For js, html, and css:
+au BufNewFile,BufRead *.js, *.html, *.css
+	\ set tabstop=2 |
+	\ set softtabstop=2 |
+	\ set shiftwidth=2 |
+	\ set fileformat=unix |
+
+" Enable syntax highlighting?...
+syntax on
+
+" Enable utf-8 encoding
+set encoding=utf-8
+
+" A couple customizations to YouCompleteMe
+" First, make sure suggestion closes after complete
+let g:ycm_autoclose_preview_window_after_completion=1
+" Second, map leader-g to goto definition
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Third, set the whitelist for this to work w/
+let g:ycm_filetype_whitelist = {'cpp': 1, 'c': 1, 'python': 1, 'js': 1}
+
+" Config for syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Config for NerdTree
+let NERDTreeIgnore=['\.pyc$', '\~$']
+
+" Config indentLine
+let g:indentLine_color_term = 239
+let g:indentLine_char = '.'

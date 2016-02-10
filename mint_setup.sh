@@ -28,6 +28,7 @@ apt-get install -y i3 i3status dmenu
 
 # Install vim!
 apt-get install -y vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Install feh (for background stuff...)
 apt-get install -y feh
@@ -61,10 +62,25 @@ cd /code/
 git clone https://github.com/treystaff/PhenoAnalysis.git
 git clone https://github.com/treystaff/spectral_metadata_tools.git
 
+# Install cmake
+apt-get install build-essential cmake
+
 # Python-related installs
+apt-get install python-dev
 apt-get install -y python-numpy python-scipy python-pandas python-gdal python-tk python-matplotlib python-pip ipython python-pip
 pip install -y pytesseract
 pip install -y simplekml
+
+# Install powerline status bar (fonts install useful for vim-airline
+# pip install --user git+git://github.com/powerline/powerline
+cd /tmp/
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+mkdir ~/.fonts/
+mv PowerlineSymbols.otf ~/.fonts/
+fc-cache -f -v
+mkdir -p ~/.config/fontconfig/fonts.conf
+mv 10-powerline-symbols.conf ~/.config/fontconfig/fonts.conf/
 
 # Now link dotfiles to the appropriate places. 
 # (Maybe move this bit into its own script later)
@@ -80,16 +96,14 @@ for dotfile in $dotfiles; do
 	ln -s /code/pc_setup/dotfiles/$dotfile ~/.$dotfile 
 done
 
-# May re-add later...Trying to mostly use Vim
-## Finally, Install Pycharm
-#cd /tmp/
-#wget https://download.jetbrains.com/python/pycharm-community-4.5.3.tar.gz
-#tar -xzf pycharm-community-4.5.3.tar.gz
-## Not sure what the best place to put this is, so stick in /opt/...
-#mkdir -p /opt/packages/pycharm
-#cp -r /tmp/pycharm-community-4.5.3/* /opt/packages/pycharm/
-#rm -rf /tmp/pycharm*
-## Symlink startup to /usr/local/bin. Maybe should put installation files here too?
-#ln -s /opt/packages/pycharm/bin/pycharm.sh /usr/local/bin/pycharm
-## Start PyCharm
-#pycharm
+# Install vim plugins
+vim +PluginInstall +qall
+
+# Install/configure the YouCompleteMe vim plugin
+# (install node stuff for enabling js complete)
+apt-get install nodejs nodejs-dev node
+cd ~/.vim/bundle/YouCompleteMe
+./install.py --clang-completer --tern-completer
+
+# Install flake8 for python syntax checking
+apt-get install python-flake8
