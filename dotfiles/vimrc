@@ -23,10 +23,6 @@ call vundle#end()
 filetype plugin indent on
 " End Vundle Config
 
-" configure the powerline status bar
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
 set laststatus=2
 "set showtabline=2
 set noshowmode
@@ -55,11 +51,16 @@ let g:airline#extension#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " Change split nav
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-j>
+nnoremap <C-K> <C-W><C-k>
+nnoremap <C-L> <C-W><C-l>
+nnoremap <C-H> <C-W><C-h>
 
+" Change window movement nav
+"noremap <C-S-J> <C-W><J>
+"noremap <C-S-K> <C-W><K>
+"noremap <C-S-L> <C-W><L>
+"noremap <C-S-H> <C-W><H>
 " File settings
 " For Python
 au BufNewFile,BufRead *.py
@@ -105,7 +106,15 @@ let g:syntastic_check_on_wq = 0
 
 " Config for NerdTree
 let NERDTreeIgnore=['\.pyc$', '\~$']
+map <C-n> :NERDTreeToggle<CR>
 
 " Config indentLine
 let g:indentLine_color_term = 239
 let g:indentLine_char = '.'
+
+" Enable improved wildcards in command
+set wildmenu
+
+" Supress warning from switching between edited buffers
+set hidden
+set confirm
