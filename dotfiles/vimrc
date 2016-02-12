@@ -16,6 +16,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'flazz/vim-colorschemes'
 " -----------------------------
 " PLACE PLUGINS ABOVE THIS LINE
 " Finish Vundle initialization
@@ -112,6 +113,11 @@ map <C-n> :NERDTreeToggle<CR>
 let g:indentLine_color_term = 239
 let g:indentLine_char = '.'
 
+"Try to set a colortheme
+set background=dark
+colorscheme zenburn 
+" Enable syntax highlighting?...
+syntax on
 " Enable improved wildcards in command
 set wildmenu
 
