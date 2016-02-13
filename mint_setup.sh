@@ -101,7 +101,8 @@ vim +PluginInstall +qall
 
 # Install/configure the YouCompleteMe vim plugin
 # (install node stuff for enabling js complete)
-apt-get install nodejs nodejs-dev node
+apt-get install nodejs nodejs-dev 
+ln -s /usr/bin/nodejs /usr/bin/node
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py --clang-completer --tern-completer
 
