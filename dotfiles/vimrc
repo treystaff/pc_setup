@@ -51,7 +51,7 @@ vnoremap <ESC> <C-c>
 let g:airline#extension#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-" Change split nav
+"Change split nav
 nnoremap <C-J> <C-W><C-j>
 nnoremap <C-K> <C-W><C-k>
 nnoremap <C-L> <C-W><C-l>
@@ -79,6 +79,7 @@ au BufNewFile,BufRead *.js, *.html, *.css
 	\ set tabstop=2 |
 	\ set softtabstop=2 |
 	\ set shiftwidth=2 |
+	\ set autoindent |
 	\ set fileformat=unix |
 
 " Enable syntax highlighting?...
@@ -101,7 +102,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -111,7 +112,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Config indentLine
 let g:indentLine_color_term = 239
-let g:indentLine_char = '.'
+let g:indentLine_char = '|'
 
 "Try to set a colortheme
 set background=dark
@@ -124,3 +125,6 @@ set wildmenu
 " Supress warning from switching between edited buffers
 set hidden
 set confirm
+
+" Just trying out transparent background:
+"hi Normal ctermbg=none
