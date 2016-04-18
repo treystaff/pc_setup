@@ -36,8 +36,8 @@ augroup END
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
-" Turns on numbering by default
-set number
+" Turns on relative numbering by default
+set relativenumber
 
 " Highlights matching brackets/braces/parens
 set showmatch
