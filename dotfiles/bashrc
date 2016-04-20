@@ -2,3 +2,5 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 export TERM="screen-256color"
+
+alias pdf="zathura"
