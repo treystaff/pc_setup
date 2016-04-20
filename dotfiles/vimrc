@@ -25,13 +25,15 @@ filetype plugin indent on
 " End Vundle Config
 
 set laststatus=2
-"set showtabline=2
 set noshowmode
 augroup FastEscape
 	autocmd!
 	au InsertEnter * set timeoutlen=0
 	au InsertLeave * set timeoutlen=1000
 augroup END
+
+" Define the leader key!
+let mapleader=" "
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -126,5 +128,9 @@ set wildmenu
 set hidden
 set confirm
 
-" Just trying out transparent background:
-"hi Normal ctermbg=none
+" Create a shortcut for showing taglist (Shift-T)
+nnoremap <S-T> :TlistToggle<CR>
+
+" Open definition in a vertical split (leader-]) and horz (leader--)
+nnoremap <leader>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <leader>- :sp <CR>:exec("tag ".expand("<cword>"))<CR>
