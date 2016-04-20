@@ -108,3 +108,12 @@ cd ~/.vim/bundle/YouCompleteMe
 
 # Install flake8 for python syntax checking
 apt-get install python-flake8
+
+# Install exuberant-ctags (tagging of source code. Makes nav easier in vim)
+apt-get install exuberant-ctags
+
+# Get and install the taglist plugin for vim (utilizes exuberant-ctags)
+cd /tmp/
+wget http://www.vim.org/scripts/download_script.php?src_id=19574 -O taglist.zip
+unzip taglist.zip -d ~/.vim/
+vim "+helptags ~/.vim/doc/" +qall
