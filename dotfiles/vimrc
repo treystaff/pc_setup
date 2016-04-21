@@ -33,7 +33,8 @@ augroup FastEscape
 augroup END
 
 " Define the leader key!
-let mapleader=" "
+"let mapleader=" "
+map <space> <leader>
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -59,11 +60,12 @@ nnoremap <C-K> <C-W><C-k>
 nnoremap <C-L> <C-W><C-l>
 nnoremap <C-H> <C-W><C-h>
 
-" Change window movement nav
-"noremap <C-S-J> <C-W><J>
-"noremap <C-S-K> <C-W><K>
-"noremap <C-S-L> <C-W><L>
-"noremap <C-S-H> <C-W><H>
+" Resize split windows
+nnoremap <leader>j :res -5<CR>
+nnoremap <leader>k :res +5<CR>
+nnoremap <leader>h :vertical resize -5<CR>
+nnoremap <leader>l :vertical resize +5<CR>
+
 " File settings
 " For Python
 au BufNewFile,BufRead *.py
