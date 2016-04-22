@@ -27,7 +27,7 @@ apt-get install texmaker texlive
 apt-get install -y i3 i3status dmenu
 
 # Install vim!
-apt-get install -y vim
+apt-get install -y vim-gnome
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Install feh (for background stuff...)
