@@ -39,7 +39,11 @@ map <space> <leader>
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
+" Enable shared system clipboard by default
+set clipboard=unnamedplus
+
 " Turns on relative numbering by default
+set number
 set relativenumber
 
 " Highlights matching brackets/braces/parens
