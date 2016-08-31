@@ -94,7 +94,7 @@ bindsym $mod+a focus parent
 
 # Define some workspace vars
 set $workspace1 "1:TERMS"
-set $workspace2 "2:FIREFOX"
+set $workspace2 "2:WEB"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -121,7 +121,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Assign Firefox to workspace 2
-assign [class="Firefox"] $workspace2
+# assign [class="Firefox"] $workspace2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -176,16 +176,16 @@ bar {
 # Open a terminal
 exec i3-sensible-terminal
 
-# Open firefox by default
-exec firefox
+# Open qutebrowser by default
+exec qutebrowser
 
 # Create hotkey for i3lock. Reccomended from i3wm: Configuration (2/3) youtube vid
-bindsym $mod+shift+x exec i3lock -i /code/pc_setup/wallpaper.png
+bindsym $mod+shift+x exec i3lock -c 000000
 # Start the wireless network applet on startup
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 
 # Define when/how to lock the screen
-exec --no-startup-id xautolock -time 20 -locker "i3lock -i '/code/pc_setup/wallpaper.png'"
+exec --no-startup-id xautolock -time 20 -locker "i3lock -i '~/code/pc_setup/wallpaper.png'"
 
 # Define when to set the monitor to black-out (30 mintes)
 # Standby Suspend Off (system does not seem to diff between)
@@ -193,7 +193,7 @@ exec xset s off
 exec_always xset dpms 1800 1800 1800
 
 # Remap esc and caps lock
-exec xmodmap ~/.xmodmap
+exec_always xmodmap ~/.xmodmap
 
 # From https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
 # Pulse Audio controls
@@ -206,17 +206,8 @@ bindsym $mod+shift+F10 exec --no-startup-id pactl set-sink-mute 0 toggle # mute 
 bindsym $mod+shift+F6 exec xbacklight -inc 20 # increase screen brightness
 bindsym $mod+shift+F5 exec xbacklight -dec 20 # decrease screen brightness
 
-# Touchpad controls
-bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-
 # Set background
-exec_always --no-startup-id feh --bg-fill /code/pc_setup/wallpaper.png
+exec_always --no-startup-id feh --bg-fill ~/code/pc_setup/wallpaper.png
 # create keybinding for screencapture
 bindsym Print exec --no-startup-id scrot latestScreen.png -z -e 'mv $f /tmp/$f'
 bindsym $mod+Print exec --no-startup-id scrot latestScreen.png -z -u -e 'mv $f /tmp/$f'
-
-# Media player controls (need to install playerctl first)
-#bindsym XF86AudioPlay exec playerctl play
-#bindsym XF86AudioPause exec playerctl pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
