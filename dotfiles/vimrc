@@ -27,6 +27,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'groenewege/vim-less'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'flowtype/vim-flow'
 " -----------------------------
 " PLACE PLUGINS ABOVE THIS LINE
 " Finish Vundle initialization
@@ -148,6 +149,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_js_checkers=['eslint']
+let g:syntastic_jsx_checkers=['eslint']
+let g:syntastic_javascript_checkers=['eslint']
 
 " Config for NerdTree
 let NERDTreeIgnore=['\.pyc$', '\~$']

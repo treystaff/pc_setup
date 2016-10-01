@@ -207,7 +207,7 @@ bindsym $mod+shift+F6 exec xbacklight -inc 20 # increase screen brightness
 bindsym $mod+shift+F5 exec xbacklight -dec 20 # decrease screen brightness
 
 # Set background
-exec_always --no-startup-id feh --bg-fill ~/code/pc_setup/wallpaper.png
+exec_always --no-startup-id feh -B black --bg-fill ~/code/pc_setup/wallpaper.png
 # create keybinding for screencapture
 bindsym Print exec --no-startup-id scrot latestScreen.png -z -e 'mv $f /tmp/$f'
 bindsym $mod+Print exec --no-startup-id scrot latestScreen.png -z -u -e 'mv $f /tmp/$f'

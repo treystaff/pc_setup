@@ -7,9 +7,6 @@ xrandr --output DP1 --primary --auto --left-of eDP1
 
 set -o vi
 
-# added by Miniconda2 4.0.5 installer
-export PATH="/opt/miniconda/bin:$PATH"
-
 function catl { cat "$1" | less; }
 export -f catl
 
@@ -31,40 +28,15 @@ alias gitcm="git commit"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-function vup {
-  local OPTIND OPT flags env
-	while getopts "pe:" OPT
-	do
-		case "${OPT}" in
-			p)
-        flags="--provision"
-				;;
-			e)
-				env=${OPTARG}
-				;;
-		esac
-	done
-  if ! [[ -v env ]]
-  then
-    env="dev"
-  fi
- 
-  vagrant nsidc up "$flags" --env="$env"
+# Unlimited history of bash inputs
+export HISTSIZE=
+export HISTFILESIZE=
+
+docker-shell () {
+   if test -z "$1"; then
+       echo "Provide a docker image name as an argument.";
+       docker ps
+       return;
+   fi;
+   docker exec -it $1  "/bin/bash";
 }
-export -f vup
-
-function vdest {
-  if [ $# -eq 0 ] 
-  then
-    vagrant nsdic destroy --env=dev
-  else
-    vagrant nsidc destroy --env="$1"
-  fi
-}
-export -f vdest
-
-export NVM_DIR="/home/trst2284/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# added by Miniconda3 4.1.11 installer
-export PATH="/home/trst2284/miniconda3/bin:$PATH"

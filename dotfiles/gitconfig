@@ -1,6 +1,6 @@
 [user]
-	email = trey.stafford@nsidc.org
-	name = Trey Stafford
+	email = treystaff@gmail.com
+	name = treystaff
 [core]
 	excludesfile = ~/.gitignore
 [push]
