@@ -1,5 +1,5 @@
 #!/bin/sh
-# Provisioning script for Linux Mint Dev VMs
+# Provisioning script for Debian based Linux machines
 # For personal use only..
 
 # --------------------------------------------------------------
@@ -16,9 +16,6 @@ case $yn in
     * ) echo "Please Answer y/n"; break;; esac
 
 read -p "Is installation on an SSD?"
-
-# Install guake (obsolete if we are installing i3....)
-#apt-get install -y guake
 
 # WRITE LATEX. LOVE LATEX. SURRENDER.
 apt-get install texmaker texlive
@@ -45,10 +42,6 @@ apt-get install -y imagemagick
 # Install QGIS
 apt-get install -y qgis qgis-python
 
-# GIT config (git will be manually installed)
-git config --global user.name "treystaff"
-git config --global user.email "treystaff@gmail.com"
-
 # Git i3 blocks (keep repo in opt for now...
 apt-get install -y ruby-ronn acpi
 cd /opt/
@@ -58,7 +51,7 @@ make clean all
 make install
 
 # Clone relevant repositories to /code/ dir (created before provisioning)
-cd /code/
+cd ~/code/
 git clone https://github.com/treystaff/PhenoAnalysis.git
 git clone https://github.com/treystaff/spectral_metadata_tools.git
 
@@ -93,7 +86,7 @@ for dotfile in $dotfiles; do
 		mv ~/.$dotfile ~/.old_dotfiles
 	fi
 	# For now, assume dir is /code/pc_setup/dotfiles.
-	ln -s /code/pc_setup/dotfiles/$dotfile ~/.$dotfile 
+	ln -s ~/code/pc_setup/dotfiles/$dotfile ~/.$dotfile 
 done
 
 # Install vim plugins

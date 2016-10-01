@@ -14,9 +14,20 @@ Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
+Plugin 'idanarye/vim-merginal'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'godlygeek/tabular'
+Plugin 'rodjek/vim-puppet'
+Plugin 'fatih/vim-go'
+Plugin 'zenbro/mirror.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'groenewege/vim-less'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'flowtype/vim-flow'
 " -----------------------------
 " PLACE PLUGINS ABOVE THIS LINE
 " Finish Vundle initialization
@@ -32,6 +43,9 @@ augroup FastEscape
 	au InsertLeave * set timeoutlen=1000
 augroup END
 
+" Set backupcopy to yes. Necessary for some file watchers (webpack-dev-server)
+" See: http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy
+set backupcopy=yes
 " Define the leader key!
 "let mapleader=" "
 map <space> <leader>
@@ -55,7 +69,7 @@ set t_Co=256
 " Remap Ctl-C in visual mode to Esc. This lets us leave visual quicker...
 vnoremap <ESC> <C-c>
 " Some config for vim-airline
-let g:airline#extension#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 "Change split nav
@@ -70,25 +84,47 @@ nnoremap <leader>k :res +5<CR>
 nnoremap <leader>h :vertical resize -5<CR>
 nnoremap <leader>l :vertical resize +5<CR>
 
+" Make nav between tabs easier
+nnoremap <S-l> gt
+nnoremap <S-h> gT
+
 " File settings
 " For Python
-au BufNewFile,BufRead *.py
+au BufNewFile,BufRead *.py,*.ts
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set textwidth=100 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
     \ let python_highlight_all=1 |
 
 " For js, html, and css:
-au BufNewFile,BufRead *.js, *.html, *.css
+au BufNewFile,BufRead *.js,*.jsx,*.html,*.css
 	\ set tabstop=2 |
 	\ set softtabstop=2 |
 	\ set shiftwidth=2 |
+        \ set expandtab |
 	\ set autoindent |
 	\ set fileformat=unix |
+
+au BufNewFile,BufRead *.less
+	\ set tabstop=2 |
+	\ set softtabstop=2 |
+	\ set shiftwidth=2 |
+        \ set expandtab |
+	\ set autoindent |
+	\ set fileformat=unix |
+
+" For yaml
+au BufNewFile,BufRead *.yaml,*.yml,*.bashrc,*.go
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
 
 " Enable syntax highlighting?...
 syntax on
@@ -113,6 +149,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_js_checkers=['eslint']
+let g:syntastic_jsx_checkers=['eslint']
+let g:syntastic_javascript_checkers=['eslint']
 
 " Config for NerdTree
 let NERDTreeIgnore=['\.pyc$', '\~$']
@@ -140,3 +180,30 @@ nnoremap <S-T> :TlistToggle<CR>
 " Open definition in a vertical split (leader-]) and horz (leader--)
 nnoremap <leader>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <leader>- :sp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+" from: http://bit.ly/28ZBb2b
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+    let @/ = ''
+    if exists('#auto_highlight')
+        au! auto_highlight
+        augroup! auto_highlight
+        setl updatetime=4000
+        echo 'Highlight current word: off'
+        return 0
+    else
+        augroup auto_highlight
+            au!
+            au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+        augroup end
+        setl updatetime=500
+        echo 'Highlight current word: ON'
+        return 1
+    endif
+endfunction
+
+" Make .sld files use the .xml syntax highlighting
+au BufNewFile,BufRead *.sld set filetype=xml

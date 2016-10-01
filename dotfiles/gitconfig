@@ -1,3 +1,7 @@
 [user]
 	email = treystaff@gmail.com
 	name = treystaff
+[core]
+	excludesfile = ~/.gitignore
+[push]
+	default = upstream

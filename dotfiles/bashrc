@@ -1,6 +1,42 @@
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-
 export TERM="screen-256color"
 
 alias pdf="zathura"
+
+xrandr --output eDP1 --mode 1920x1080
+xrandr --output DP1 --primary --auto --left-of eDP1
+
+set -o vi
+
+function catl { cat "$1" | less; }
+export -f catl
+
+function ll { 
+	if [ $# -eq 0 ]
+	then
+		ls -la . | less;
+	else
+		ls -la "$1" | less;
+	fi
+}
+export -f ll
+
+alias gits="git status"
+alias gitd="git diff"
+alias gitchk="git checkout"
+alias gitcm="git commit"
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+# Unlimited history of bash inputs
+export HISTSIZE=
+export HISTFILESIZE=
+
+docker-shell () {
+   if test -z "$1"; then
+       echo "Provide a docker image name as an argument.";
+       docker ps
+       return;
+   fi;
+   docker exec -it $1  "/bin/bash";
+}
