@@ -28,6 +28,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'groenewege/vim-less'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'flowtype/vim-flow'
+Plugin 'tmhedberg/SimpylFold'
 " -----------------------------
 " PLACE PLUGINS ABOVE THIS LINE
 " Finish Vundle initialization
@@ -207,3 +208,11 @@ endfunction
 
 " Make .sld files use the .xml syntax highlighting
 au BufNewFile,BufRead *.sld set filetype=xml
+
+" Config for SimpylFold (folding for python)
+let g:SimpylFold_docstring_preview=1
+let g:SimpylFold_fold_import=0
+autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+nnoremap <leader>o zo
+nnoremap <leader>c zc
