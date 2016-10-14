@@ -27,6 +27,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'groenewege/vim-less'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'mileszs/ack.vim'
 " -----------------------------
 " PLACE PLUGINS ABOVE THIS LINE
 " Finish Vundle initialization
@@ -202,3 +203,10 @@ endfunction
 
 " Make .sld files use the .xml syntax highlighting
 au BufNewFile,BufRead *.sld set filetype=xml
+
+" Set ag (the silver searcher) to be the default search used by vim ack.
+if executable('ag')
+	let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+cnoreabbrev ag Ack!
+nnoremap <Leader>a :Ack!<Space>
